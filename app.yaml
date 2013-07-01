@@ -1,13 +1,9 @@
-application: moegirlweixin
+application: xuechong87py
 version: 1
 runtime: python27
 api_version: 1
 threadsafe: true
 
 handlers:
--url:/.*
-	script:mainProcessor.app
-- url: /say
-  script: say.app
-- url: /.*
-  script: helloworld.app
+- url: /weixin
+  script: mainProcessor.app
