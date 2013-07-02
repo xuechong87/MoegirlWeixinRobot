@@ -5,6 +5,7 @@ Created on 2013-7-1
 '''
 import webapp2
 import hashlib
+from xmlread import MsgContent
 
 weixin_token = "token"
 
@@ -26,7 +27,18 @@ class MainProcessor(webapp2.RequestHandler):
             write("what's up man -.-?")
         
     def post(self):
-        return self.get(self)
+        write = self.response.out.write
+        msg = MsgContent(self.request._body__get())
+        result = "<xml>\
+        <ToUserName><![CDATA[${toUser}]]></ToUserName>\
+        <FromUserName><![CDATA[${fromUser}]]></FromUserName> \
+        <CreateTime>${createTime}</CreateTime>\
+        <MsgType><![CDATA[text]]></MsgType>\
+        <Content><![CDATA[哈哈哈哈啊哈哈啊]]></Content>\
+        <MsgId>${MsgId}</MsgId>\
+        </xml>".replace("${toUser}", msg.get("ToUserName")).replace("${FromUserName}","")\
+        .replace("${createTime}",msg.get("CreateTime")).replace("${MsgId}",msg.get("MsgId"))
+        write(result)
 
 app = webapp2.WSGIApplication([('/test', MainProcessor)])
 
