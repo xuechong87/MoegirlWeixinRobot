@@ -20,4 +20,4 @@ if __name__ == "__main__":
     help(hashlib.sha1())
     sha1 = hashlib.sha1()
     sha1.update("test")
-    print sha1.digest()
+    print str(sha1.hexdigest())

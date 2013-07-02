@@ -28,6 +28,6 @@ class MainProcessor(webapp2.RequestHandler):
     def post(self):
         return self.get(self)
 
-app = webapp2.WSGIApplication([('/weixin', MainProcessor)])
+app = webapp2.WSGIApplication([('/test', MainProcessor)])
 
 
