@@ -4,8 +4,14 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
+
 handlers:
-- url: /say
+- url: /weixin
+  script: mainProcessor.app
+- url: /deploy
   script: say.app
 - url: /.*
   script: main.app
+- url: /test
+  script: tester.app
+
