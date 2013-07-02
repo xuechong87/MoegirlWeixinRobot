@@ -8,4 +8,4 @@ handlers:
 - url: /say
   script: say.app
 - url: /.*
-  script: helloworld.app
+  script: main.app
