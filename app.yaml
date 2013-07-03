@@ -6,6 +6,7 @@ threadsafe: true
 
 handlers:
 - url: /weixin
-  script: MainProcessor.app
+  script: mainProcessor.app
 - url: /test
   script: tester.app
+
