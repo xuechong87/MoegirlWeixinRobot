@@ -17,7 +17,13 @@ def sha1test(str):
 if __name__ == "__main__":
     #sortTests()
     #sha1test("aaaaaaaa")
-    help(hashlib.sha1())
-    sha1 = hashlib.sha1()
-    sha1.update("test")
-    print str(sha1.hexdigest())
+    #help(hashlib.sha1())
+    #sha1 = hashlib.sha1()
+    #sha1.update("test")
+    #print str(sha1.hexdigest())
+    tu = (1,2,3)
+    list_ = list(tu)
+    print list_
+    list_.remove(2)
+    print list_[0]
+    print tu
