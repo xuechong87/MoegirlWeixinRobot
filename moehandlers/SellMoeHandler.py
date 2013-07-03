@@ -17,7 +17,7 @@ class SellMoeHandler(object):
         logging.debug(handlerChain.userMsg.get("MsgType"))
         
         if(handlerChain.userMsg.get("MsgType")!="text"):
-            return None#if you cant handle this msg ,just return None 
+            return None#if you cant handle this msg ,just return None or return handlerChain.invokeNext()
         
         answer = random.randint(0,len(sellMoeList)-1)
         return Weixin.textReply(handlerChain.userMsg,sellMoeList[answer])
