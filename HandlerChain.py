@@ -6,16 +6,18 @@ handler chain
 '''
 from moehandlers.SellMoeHandler import SellMoeHandler
 from Weixin import textReply
+import logging
 
-__default_chain__ = (SellMoeHandler(),)
+__default_chain__ = (SellMoeHandler,)
 
 class HandlerChain(object):
     
     handlers = list()
     userMsg = None
     
-    def __init__(self,userMsg,handlers=list(__default_chain__)):
-        self.handlers  = handlers
+    def __init__(self,userMsg):
+        self.handlers=list(__default_chain__)
+        logging.debug("new handlerChain" + str(self.handlers))
         self.userMsg = userMsg
         
     def doChain(self):
@@ -25,8 +27,8 @@ class HandlerChain(object):
     def invokeNext(self):
         result = None
         if len(self.handlers)>0:
-            handler = self.handlers.pop()
-            result = handler.invoke(self)
+            handler = self.handlers.pop()()
+            result = handler.handle(self)
             if result==None and len(self.handlers)>0:
                 result = self.invokeNext()
         return result
