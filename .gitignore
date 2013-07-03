@@ -3,7 +3,7 @@
 #############
 ## Python
 #############
-
+.settings
 *.py[co]
 
 # Packages

@@ -5,29 +5,30 @@ Created on 2013-7-1
 @author: xuechong
 '''
 import webapp2
-import hashlib
+from Weixin import MsgContent
+import logging
+import Weixin
+from HandlerChain import HandlerChain
 
-weixin_token = "token"
 
 class MainProcessor(webapp2.RequestHandler):
     
     def get(self):
         param = self.request.get
         write = self.response.out.write
-        
-        list_ = sorted([weixin_token, param("timestamp"), param("nonce")])
-        sha1 = hashlib.sha1()
-        sha1.update("".join(list_))
-        
         self.response.headers['Content-Type'] = 'text/plain'
-        
-        if str(sha1.hexdigest()) == param("signature"):
+        if Weixin.validate(param):
             write(param("echostr"))
         else:
             write("what's up man -.-?")
         
     def post(self):
-        return self.get(self)
+        if Weixin.validate(self.request.get):
+            logging.debug(self.request._body__get())
+            write = self.response.out.write
+            msg = MsgContent(self.request._body__get())
+            handlerChain= HandlerChain(userMsg=msg)
+            write(handlerChain.doChain())
 
 app = webapp2.WSGIApplication([('/weixin', MainProcessor)])
 

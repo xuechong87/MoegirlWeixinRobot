@@ -27,8 +27,12 @@ class HandlerChain(object):
         """
         invoke handlers and return reply xmlstr
         """
-        result =  self.invokeNext()
-        return result==None and textReply(self.userMsg) or result
+        try :
+            result =  self.invokeNext()
+            return result==None and textReply(self.userMsg) or result
+        except Exception as e:
+            logging.exception(str(e))
+            return textReply(self.userMsg,"555更新姬被玩坏了啦")
     
     def invokeNext(self):
         """
@@ -54,4 +58,12 @@ class HandlerChain(object):
         get the content of the income msg
         """
         return self.userMsg.get("Content")
+    def forceStop(self):
+        """
+        stop the handler chain 
+        after call this ,if you can return a None to reply user a default msg
+        and the rest of the handlers will not be invoked
+        """
+        self.handlers = list()
+        
         
