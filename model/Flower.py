@@ -4,6 +4,8 @@ Created on 2013-7-4
 
 @author: xuechong
 '''
+
+import logging
 from google.appengine.ext import db
 from google.appengine.ext import search
 
@@ -13,8 +15,9 @@ class Flower(search.SearchableModel):
     content = db.StringProperty()
     
     def description(self):
-        result = str(self.name) + ":\n" + str(self.content) + "\n"
-        return result.encode("utf-8")
+        result = self.name + unicode(":\n","utf-8")\
+             + self.content + unicode("\n","utf-8")
+        return result
     @classmethod
     def SearchableProperties(cls):
         return [['name'],search.ALL_PROPERTIES]
@@ -30,6 +33,6 @@ def save(name,content):
     
 def findByName(searchStr):
     query = Flower.all()
-    query.search(searchStr, properties=['name'])
+    logging.debug("search flower" + searchStr)
+    query.search(searchStr.decode("utf-8"), properties=['name'])
     return query.fetch(20)
-

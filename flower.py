@@ -15,7 +15,7 @@ class FlowerProcessor(webapp2.RequestHandler):
     def get(self):
         try:
             save("豆花","又叫豆腐脑")
-            save("豆花(咸)","壮我大咸党!!!")
+            save("豆花(咸)","壮哉我大咸党!!!")
             save("豆花(甜)","甜党才是王道!!!")
             save("豆花(辣)","辣党万岁!!!")
         except Exception as e:
