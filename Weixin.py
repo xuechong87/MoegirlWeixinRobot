@@ -10,7 +10,6 @@ import logging
 from xml.etree import ElementTree
 
 __token = "token"
-
 __text_answer = "<xml><ToUserName><![CDATA[${toUser}]]></ToUserName><FromUserName><![CDATA[${fromUser}]]></FromUserName><CreateTime>${createTime}</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[${Content}]]></Content><MsgId>${MsgId}</MsgId></xml>"
 
 def validate(param):
@@ -22,7 +21,7 @@ def validate(param):
     sha1.update("".join(list_))
     return str(sha1.hexdigest()) == param("signature")
 
-def textReply(originMsg,replyStr="阿类?人家不懂你在说什么啦"):
+def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'-help'或者'帮助'可以查看帮助哦!"):
     """
     return a text type reply xml
     """

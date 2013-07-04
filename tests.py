@@ -23,7 +23,6 @@ if __name__ == "__main__":
     #print str(sha1.hexdigest())
     tu = (1,2,3)
     list_ = list(tu)
-    print list_
-    list_.remove(2)
-    print list_[0]
+    print list_.pop()
+    print list_.pop()
     print tu

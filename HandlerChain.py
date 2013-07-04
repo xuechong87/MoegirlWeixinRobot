@@ -4,11 +4,20 @@ Created on 2013-7-3
 handler chain
 @author: xuechong
 '''
+from moehandlers.FlowerHandler import FlowerHandler
 from moehandlers.SellMoeHandler import SellMoeHandler
+from moehandlers.HelpHandler import HelpHandler
 from Weixin import textReply
 import logging
 
-__default_chain__ = (SellMoeHandler,)
+__default_chain__ = (SellMoeHandler,HelpHandler,FlowerHandler)
+__text_chain__=(SellMoeHandler,HelpHandler,FlowerHandler)
+
+def textHandlerChain(userMsg):
+    """
+    return a new instance of a default text msg handler chain
+    """
+    return HandlerChain(userMsg,list(__text_chain__))
 
 class HandlerChain(object):
     """
@@ -18,8 +27,10 @@ class HandlerChain(object):
     handlers = list()
     userMsg = None
     
-    def __init__(self,userMsg):
-        self.handlers=list(__default_chain__)
+    def __init__(self,userMsg,handlerList=None):
+        self.handlers = handlerList
+        if self.handlers==None:
+            self.handlers=list(__default_chain__)
         logging.debug("new handlerChain" + str(self.handlers))
         self.userMsg = userMsg
         
@@ -32,7 +43,7 @@ class HandlerChain(object):
             return result==None and textReply(self.userMsg) or result
         except Exception as e:
             logging.exception(str(e))
-            return textReply(self.userMsg,"555更新姬被玩坏了啦")
+            return textReply(self.userMsg,"555更新姬被玩坏了啦><")
     
     def invokeNext(self):
         """
@@ -57,7 +68,7 @@ class HandlerChain(object):
         """
         get the content of the income msg
         """
-        return self.userMsg.get("Content")
+        return self.userMsg.get("Content").encode("utf-8").strip()
     def forceStop(self):
         """
         stop the handler chain 
