@@ -19,6 +19,7 @@ class FlowerHandler(object):
                 flowerName = content.replace(__flower_key__, "")
                 if flowerName!="":
                     return Weixin.textReply(handlerChain.userMsg,findFlower(flowerName))
+        
         return handlerChain.invokeNext()
 
 def findFlower(flowerName):
@@ -30,6 +31,8 @@ def findFlower(flowerName):
         result = ""
         for flower in flowerList:
             result = result + flower.description()
+        if len(flowerList)>10:
+            result = result + u"\n更新姬提示:\n搜索的结果有点多,可以尝试更多关键字搜索哦!"
         return result
    
     
