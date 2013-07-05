@@ -9,7 +9,7 @@ from Weixin import MsgContent
 import logging
 import Weixin
 from HandlerChain import HandlerChain
-
+from HandlerChain import __text_chain__ 
 
 class MainProcessor(webapp2.RequestHandler):
     
@@ -23,12 +23,13 @@ class MainProcessor(webapp2.RequestHandler):
             write("what's up man -.-?")
         
     def post(self):
-        if Weixin.validate(self.request.get):
-            logging.debug(self.request._body__get())
-            write = self.response.out.write
-            msg = MsgContent(self.request._body__get())
-            handlerChain= HandlerChain(userMsg=msg)
-            write(handlerChain.doChain())
+        #if Weixin.validate(self.request.get):
+        logging.debug(self.request._body__get())
+        write = self.response.out.write
+        msg = MsgContent(self.request._body__get())
+        chain = list(__text_chain__)
+        handlerChain= HandlerChain(userMsg=msg,handlerList=chain)
+        write(handlerChain.doChain())
 
 app = webapp2.WSGIApplication([('/test', MainProcessor)])
 
