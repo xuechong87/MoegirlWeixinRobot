@@ -10,8 +10,8 @@ from moehandlers.HelpHandler import HelpHandler
 from Weixin import textReply
 import logging
 
-__default_chain__ = (SellMoeHandler,HelpHandler,FlowerHandler)
-__text_chain__=(SellMoeHandler,HelpHandler,FlowerHandler)
+__default_chain__ = (SellMoeHandler,FlowerHandler,HelpHandler)
+__text_chain__=(SellMoeHandler,FlowerHandler,HelpHandler)
 
 def textHandlerChain(userMsg):
     """
