@@ -1,7 +1,8 @@
+# coding: utf-8
 '''
 Created on 2013-7-5
 http://bt.ktxp.com/playbill.php
-@author: Administrator
+@author: xuechong
 '''
 import urllib2
 
