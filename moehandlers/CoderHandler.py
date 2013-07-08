@@ -14,7 +14,7 @@ client = memcache.Client()
 __coderCalenderKey__ = ""
 __namespace__ = "coderCalender"
 
-class CoderCalender():
+class CoderHandler():
     """
     the coder lao huang li!!! for moegirl wiki
     """
@@ -47,6 +47,23 @@ def addNew():
                time=24*60*60,\
                namespace=__namespace__)
     return content
+_chong = ["Java","Python","C#","Javascript","Perl","C","C++",\
+          "Delphi","Objective-c","Basic","PHP","Ruby","Pascal",\
+          "Lisp","MATLAB","T-SQL","PL-SQL","GO","Lua","Erlang",\
+          "Scala","Groovy","Smalltalk","F#","Fortran","ActionScript",\
+          "Bash","Ada"]
+_sha = ["Eclipse","Netbeans","Vim","Emacs","UltraEdit","Notepad++",\
+        "EditPlus","SublimeText","VisualStudio","Delphi","Aptana",\
+        "GCC","DreamWeaver","PowerDesigner","MySql","Oracle","DB2",\
+        "MongoDB","SQLServer","Suse","Ubuntu","CentOS","WindowsServer",\
+        "Excel","PhotoShop"]
+
+_jy_style_ = ["面朝","躺在","跪在","坐在","站在","趴在","倒立在","背向"]
+_jy_place_ = ["东南","西北","西南","东北","书桌","键盘","马扎","沙发","床","鼠标",\
+              "显示器","平板电脑"]
+_jy_ccontent_ = ["写设计文档","写单元测试","部署生产环境","重做系统","重构代码",""]
+_j_detail_ = [""]
+_y_detail_ = [""]
 
 def newContent():
     return ""
