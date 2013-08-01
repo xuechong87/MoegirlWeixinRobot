@@ -5,6 +5,11 @@ http://bt.ktxp.com/playbill.php
 @author: xuechong
 '''
 import urllib2
+from bs4 import BeautifulSoup
+
+file_ = open("f:/contents.txt","r",-1)
+text = file_.read()
+file_.close()
 
 url ="http://bt.ktxp.com/playbill.php"
 def readContent():
@@ -13,6 +18,16 @@ def readContent():
     response = urllib2.urlopen(req)
     page = response.read()
     return page
-    
+
+def decodeContent(content):
+    soup = BeautifulSoup(content)
+    _dtList = soup.find_all("dt")
+    for dl in soup.find_all("dl"):
+        print dl.find("dt").contents[0].encode("utf-8")
+        for dd in dl.find_all("dd"):
+            print dd.find("a").contents[0].encode("utf-8")
 if __name__ == '__main__':
-    print (readContent())
+    
+    decodeContent(readContent())
+    
+    pass
