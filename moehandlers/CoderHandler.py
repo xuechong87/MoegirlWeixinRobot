@@ -6,21 +6,28 @@ the coder lao huang li!!! for moegirl wiki
 '''
 from google.appengine.api import memcache
 from Weixin import textReply
-import time
 import logging
 from utils.Commons import randomFromList
+from utils.Commons import loadFromMemcache
+from utils.Commons import todayStr
 
 client = memcache.Client()
 __coderCalenderKey__ = ""
 __namespace__ = "coderCalender"
 
+todayKey = lambda : "coderCalender" + str(todayStr())
+
+find = lambda: loadFromMemcache(__namespace__, todayKey(), newContent)
+
 class CoderHandler():
     """
     the coder lao huang li!!! for moegirl wiki
     """
+    
     @staticmethod
     def __helpkey__ ():
         return __coderCalenderKey__
+    
     @staticmethod
     def __helpcontent__():
         return ""
@@ -30,23 +37,8 @@ class CoderHandler():
             return textReply(handlerChain.userMsg,find())
         else:
             return handlerChain.invokeNext()
-    
-todayKey = lambda : "coderCalender" + time.strftime('%Y-%m-%d',time.localtime(time.time()))
 
-def find():
-    result =client.get(todayKey(), __namespace__)
-    if result is None:
-        result = addNew()
-    return result
 
-def addNew():
-    logging.info("create new coder calender")
-    content = newContent()
-    client.set(key=todayKey(),\
-               value = content,\
-               time=24*60*60,\
-               namespace=__namespace__)
-    return content
 _chong = ["Java","Python","C#","Javascript","Perl","C","C++",\
           "Delphi","Objective-c","Basic","PHP","Ruby","Pascal",\
           "Lisp","MATLAB","T-SQL","PL-SQL","GO","Lua","Erlang",\
@@ -66,7 +58,5 @@ _j_detail_ = ["各种装不上驱动会让你发狂","老牛破车一样的网�
 _y_detail_ = ["今天装系统你能很快找到需要的驱动和应用软件","你的程序架构设计很好,升级不会带来任何问题"]
 
 def newContent():
+    logging.info("create new coder content" + todayKey())
     return ""
-
-if __name__ == "__main__":
-    print todayKey()

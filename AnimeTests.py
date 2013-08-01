@@ -5,9 +5,9 @@ http://bt.ktxp.com/playbill.php
 @author: xuechong
 '''
 
-import urllib2
 from bs4 import BeautifulSoup
-from utils import Commons
+from utils.Commons import fetchContentFromUrl 
+from utils.Commons import todayStr
 from google.appengine.api import memcache
 
 #file_ = open("f:/contents.txt","r",-1)
@@ -15,20 +15,17 @@ from google.appengine.api import memcache
 #file_.close()
 
 url ="http://bt.ktxp.com/playbill.php"
-def readContent():
-    header ={'User-Agent':'mozilla/5.0 (windows; U; windows NT 5.1; zh-cn)'}
-    req=urllib2.Request(url,None,header)
-    response = urllib2.urlopen(req)
-    page = response.read()
-    return page
+getContent = lambda : fetchContentFromUrl(url)
 
 def decodeContent(content):
+    result= ""
     soup = BeautifulSoup(content)
     _dtList = soup.find_all("dt")
     for dl in soup.find_all("dl"):
-        print dl.find("dt").contents[0].encode("utf-8")
+        result = result + dl.find("dt").contents[0].encode("utf-8") + ":\r\n"
         for dd in dl.find_all("dd"):
-            print dd.find("a").contents[0].encode("utf-8")
+            result = result +  dd.find("a").contents[0].encode("utf-8") + "\r\n"
+    return result
             
 def todayContent():
     pass
@@ -37,7 +34,7 @@ def loadFromCache():
     
     pass
 
-todayKey = lambda : "animeList" + str(Commons.todayStr())
+todayKey = lambda : "animeList" + str(todayStr())
 
 if __name__ == '__main__':
     
