@@ -4,6 +4,8 @@ Created on 2013-7-1
 @author: xuechong
 '''
 import hashlib
+import datetime
+from utils import Commons
 def sortTests():
     a = "aaaabbc"
     b = "aaabbc"
@@ -26,3 +28,13 @@ if __name__ == "__main__":
     print list_.pop()
     print list_.pop()
     print tu
+    x = datetime.datetime.utcnow() + datetime.timedelta(hours=+8)
+    
+    
+#    print type(x)
+#    print help(datetime.datetime)
+#    print str(x.year) + str(x.month) + str(x.day)
+#    print x.strftime("%Y%m%d")
+    print Commons.todayStr()
+    
+    pass

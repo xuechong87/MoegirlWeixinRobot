@@ -7,7 +7,7 @@
 <value>C:\Program Files (x86)\Google\google_appengine</value>
 </pydev_variables_property>
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
-<path>/MoegirlWeixinRobot</path>
+<path>/gaepy</path>
 </pydev_pathproperty>
 <pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
 <path>${GOOGLE_APP_ENGINE}</path>
@@ -46,5 +46,5 @@
 <path>${GOOGLE_APP_ENGINE}/lib/yaml/lib</path>
 </pydev_pathproperty>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.7</pydev_property>
-<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">py27</pydev_property>
 </pydev_project>
