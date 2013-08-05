@@ -9,7 +9,12 @@ from Weixin import MsgContent
 import logging
 import Weixin
 from HandlerChain import HandlerChain
-from HandlerChain import __text_chain__ 
+from moehandlers.SellMoeHandler import SellMoeHandler
+from moehandlers.FlowerHandler import FlowerHandler
+from moehandlers.HelpHandler import HelpHandler
+from moehandlers.AnimeListHandler import AnimeListHandler
+
+__test_chain__=(SellMoeHandler,FlowerHandler,HelpHandler,AnimeListHandler)
 
 class MainProcessor(webapp2.RequestHandler):
     
@@ -27,7 +32,7 @@ class MainProcessor(webapp2.RequestHandler):
         logging.debug(self.request._body__get())
         write = self.response.out.write
         msg = MsgContent(self.request._body__get())
-        chain = list(__text_chain__)
+        chain = list(__test_chain__)
         handlerChain= HandlerChain(userMsg=msg,handlerList=chain)
         write(handlerChain.doChain())
 

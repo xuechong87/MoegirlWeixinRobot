@@ -22,6 +22,7 @@ def fetchContentFromUrl(url):
     return page
 
 memclient = memcache.Client()
+
 def loadFromMemcache(namespace,key,createfunction,time=24*60*60):
     """
     load or create from memcache
@@ -30,9 +31,11 @@ def loadFromMemcache(namespace,key,createfunction,time=24*60*60):
     logging.info("load from memcache" + namespace + key)
     result = memclient.get(key=key,namespace=namespace)
     if result is None:
+        logging.info("create new and put into memcache" + namespace + key)
         result = createfunction()
         memclient.set(key=key,\
                    value = result,\
                    time=time,\
                namespace=namespace)
     return result
+

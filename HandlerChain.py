@@ -7,11 +7,12 @@ handler chain
 from moehandlers.FlowerHandler import FlowerHandler
 from moehandlers.SellMoeHandler import SellMoeHandler
 from moehandlers.HelpHandler import HelpHandler
+from moehandlers.AnimeListHandler import AnimeListHandler
 from Weixin import textReply
 import logging
 
-__default_chain__ = (SellMoeHandler,FlowerHandler,HelpHandler)
-__text_chain__=(SellMoeHandler,FlowerHandler,HelpHandler)
+__default_chain__ = (SellMoeHandler,FlowerHandler,HelpHandler,AnimeListHandler)
+__text_chain__=(SellMoeHandler,FlowerHandler,HelpHandler,AnimeListHandler)
 
 def textHandlerChain(userMsg):
     """
@@ -74,7 +75,9 @@ class HandlerChain(object):
         stop the handler chain 
         after call this ,if you can return a None to reply user a default msg
         and the rest of the handlers will not be invoked
+        *return a None*
         """
         self.handlers = list()
+        return None
         
         

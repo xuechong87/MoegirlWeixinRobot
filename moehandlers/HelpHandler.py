@@ -7,12 +7,13 @@ Created on 2013-7-4
 import Weixin
 import logging
 from moehandlers.FlowerHandler import FlowerHandler
+from moehandlers.AnimeListHandler import AnimeListHandler
 
-handlers_ = (FlowerHandler,)
+handlers_ = (FlowerHandler,AnimeListHandler)
 
 __help_key__ = "帮助"
 
-__help_content__ =  "输入帮助**可以查看特定的帮助哦\n更新姬在可以理解的关键词:\n"
+__help_content__ =  "输入帮助**可以查看特定的帮助哦\n比如输入:帮助花语 就可以查看花语的帮助了啦\n更新姬在可以理解的关键词:\n"
 for handler in handlers_ :
     __help_content__ = __help_content__ + "☆"\
      + handler.__helpkey__() + "\n"

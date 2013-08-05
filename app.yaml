@@ -9,5 +9,5 @@ handlers:
   script: mainProcessor.app
 - url: /test
   script: tester.app
-- url: /flower
-  script: flower.app
+- url: /init
+  script: inits.app
