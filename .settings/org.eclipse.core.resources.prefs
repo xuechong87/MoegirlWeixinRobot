@@ -1,4 +1,4 @@
-#Mon Aug 05 19:25:40 CST 2013
+#Wed Aug 07 20:49:36 CST 2013
 eclipse.preferences.version=1
 encoding//bs4/dammit.py=utf-8
 encoding//model/Flower.py=utf-8
@@ -9,6 +9,7 @@ encoding//moehandlers/HelpHandler.py=utf-8
 encoding//moehandlers/SellMoeHandler.py=utf-8
 encoding//utils/Commons.py=utf-8
 encoding/HandlerChain.py=utf-8
+encoding/MoeGirlWiki.py=utf-8
 encoding/Weixin.py=utf-8
 encoding/flower.py=utf-8
 encoding/mainProcessor.py=utf-8
