@@ -14,25 +14,40 @@ cleancontent = lambda x:str(x).replace("<span class='searchmatch'>", "").replace
 
 
 class WikiContent(object):
+    
     title=""
     snippet=""
     size=""
     wordcount=""
     timestamp=""
     
-if __name__ == '__main__':
+def searchTitle(title,size=10):
+    result = list()
     remoteResult = fetchContentFromUrl(_wikiurl.replace("$title", "夏娜").replace("$limit", "10"))
-    print remoteResult + "\n"
-    result = json.loads(remoteResult)
-    allSubjects=result["query"]["search"]
+    allSubjects=json.loads(remoteResult)["query"]["search"]
     for subject in allSubjects:
-        print "title=" + cleancontent(subject["title"]) + "\n"
-        print "snippet=" + cleancontent(subject["snippet"]) + "\n"
-        print "timestamp=" + str(subject["timestamp"]) + "\n"
-    
-    
-    
-    
-    
-    pass
+        content = WikiContent()
+        content.title = cleancontent(subject["title"])
+        content.snippet = cleancontent(subject["snippet"])
+        content.size = subject["size"]
+        content.wordcount = subject["wordcount"]
+        content.timestamp = subject["timestamp"]
+        result.append(content)
+    return result
+
+#if __name__ == '__main__':
+#    remoteResult = fetchContentFromUrl(_wikiurl.replace("$title", "夏娜").replace("$limit", "10"))
+#    print remoteResult + "\n"
+#    result = json.loads(remoteResult)
+#    allSubjects=result["query"]["search"]
+#    for subject in allSubjects:
+#        print "title=" + cleancontent(subject["title"]) + "\n"
+#        print "snippet=" + cleancontent(subject["snippet"]) + "\n"
+#        print "timestamp=" + str(subject["timestamp"]) + "\n"
+#    
+#    
+#    
+#    
+#    
+#    pass
     
