@@ -21,7 +21,7 @@ def validate(param):
     sha1.update("".join(list_))
     return str(sha1.hexdigest()) == param("signature")
 
-def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'-help'或者'帮助'可以查看帮助哦!"):
+def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'帮助'可以查看帮助哦!"):
     """
     return a text type reply xml
     """

@@ -7,6 +7,8 @@ http://zh.moegirl.org/api.php?format=json&action=query&list=search&srwhat=text&s
 '''
 from utils.Commons import fetchContentFromUrl
 import json
+import logging
+import urllib
 
 _wikiurl = "http://zh.moegirl.org/api.php?format=json&action=query&list=search&srwhat=title&srsearch=$title&srlimit=$limit"
 
@@ -22,8 +24,11 @@ class WikiContent(object):
     timestamp=""
     
 def searchTitle(title,size=10):
+    logging.info(title)
     result = list()
-    remoteResult = fetchContentFromUrl(_wikiurl.replace("$title", "夏娜").replace("$limit", "10"))
+    logging.info( _wikiurl.replace("$title", urllib.quote(title)).replace("$limit", "10"))
+    remoteResult = fetchContentFromUrl(_wikiurl.replace("$title", urllib.quote(title)).replace("$limit", "10"))
+    
     allSubjects=json.loads(remoteResult)["query"]["search"]
     for subject in allSubjects:
         content = WikiContent()

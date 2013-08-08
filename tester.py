@@ -13,8 +13,9 @@ from moehandlers.SellMoeHandler import SellMoeHandler
 from moehandlers.FlowerHandler import FlowerHandler
 from moehandlers.HelpHandler import HelpHandler
 from moehandlers.AnimeListHandler import AnimeListHandler
+from moehandlers.SearchHandler import SearchHandler
 
-__test_chain__=(SellMoeHandler,FlowerHandler,HelpHandler,AnimeListHandler)
+__test_chain__=(SellMoeHandler,SearchHandler,FlowerHandler,HelpHandler,AnimeListHandler)
 
 class MainProcessor(webapp2.RequestHandler):
     

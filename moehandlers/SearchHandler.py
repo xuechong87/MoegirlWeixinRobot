@@ -6,13 +6,14 @@ search the moegirl wiki
 '''
 import MoeGirlWiki
 import Weixin
+import urllib 
 
 __suf__="是什么"
 
 class SearchHandler():
     @staticmethod
     def __helpkey__ ():
-        return ""
+        return "搜索萌百"
     @staticmethod
     def __helpcontent__():
         return ""
@@ -22,7 +23,7 @@ class SearchHandler():
         if (handlerChain.getMsgType()=="text"):
             content = handlerChain.getMsgContent()
             if hasKeyWord(content):
-                searchKey = content[:-3]
+                searchKey = content[:content.rfind(__suf__)]
                 resultList = MoeGirlWiki.searchTitle(searchKey)
                 return Weixin.textReply(handlerChain.userMsg,buildReplyStr(resultList))
         return handlerChain.invokeNext()
@@ -32,8 +33,21 @@ def hasKeyWord(content):
     
 
 def buildReplyStr(wikiList):
-    for subject in  wikiList:
-        pass
+    if len(wikiList)>0:
+        result = list()
+        for subject in  wikiList:
+            result.append(subject.title)
+            result.append(":\n")
+            result.append(subject.snippet)
+            result.append("\n")
+            result.append("http://zh.moegirl.org/" + urllib.quote(subject.title))
+            result.append("\n\n")
+            pass
+        if len(wikiList)>5:
+            result.append(u"\n★更新姬提示★:\n搜索的结果有点多,可以尝试更多关键字搜索哦!")
+        return "".join(result)
+    else:
+        return "人家不知道这种东西了啦"
         
     
     
