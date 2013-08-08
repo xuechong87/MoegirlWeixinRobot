@@ -12,7 +12,7 @@ import urllib
 
 _wikiurl = "http://zh.moegirl.org/api.php?format=json&action=query&list=search&srwhat=title&srsearch=$title&srlimit=$limit"
 
-cleancontent = lambda x:str(x).replace("<span class='searchmatch'>".encode("utf-8"), "".encode("utf-8")).replace("</span>".encode("utf-8"), "".encode("utf-8"))
+cleancontent = lambda x:x.replace("<span class='searchmatch'>", "").replace("</span>", "")
 
 
 class WikiContent(object):
