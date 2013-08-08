@@ -13,10 +13,10 @@ __suf__="是什么"
 class SearchHandler():
     @staticmethod
     def __helpkey__ ():
-        return "搜索萌百"
+        return "搜索"
     @staticmethod
     def __helpcontent__():
-        return ""
+        return "输入'**是什么'就可以搜索萌百内对应的内容咯\n比如'夏娜是什么'就可以搜索'夏娜'相关的条目哦!"
     
     def handle(self,handlerChain):
         

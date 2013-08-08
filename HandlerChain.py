@@ -10,9 +10,10 @@ from moehandlers.HelpHandler import HelpHandler
 from moehandlers.AnimeListHandler import AnimeListHandler
 from Weixin import textReply
 import logging
+from moehandlers.SearchHandler import SearchHandler
 
-__default_chain__ = (SellMoeHandler,FlowerHandler,HelpHandler,AnimeListHandler)
-__text_chain__=(SellMoeHandler,FlowerHandler,HelpHandler,AnimeListHandler)
+__default_chain__ = (SellMoeHandler,SearchHandler,FlowerHandler,HelpHandler,AnimeListHandler)
+__text_chain__=(SellMoeHandler,SearchHandler,FlowerHandler,HelpHandler,AnimeListHandler)
 
 def textHandlerChain(userMsg):
     """

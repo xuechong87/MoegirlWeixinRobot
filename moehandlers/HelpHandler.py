@@ -8,8 +8,9 @@ import Weixin
 import logging
 from moehandlers.FlowerHandler import FlowerHandler
 from moehandlers.AnimeListHandler import AnimeListHandler
+from moehandlers.SearchHandler import SearchHandler
 
-handlers_ = (FlowerHandler,AnimeListHandler)
+handlers_ = (FlowerHandler,AnimeListHandler,SearchHandler)
 
 __help_key__ = "帮助"
 
