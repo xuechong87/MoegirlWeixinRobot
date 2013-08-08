@@ -37,15 +37,14 @@ def buildReplyStr(wikiList):
         result = list()
         for subject in  wikiList:
             result.append(subject.title)
-            result.append(":\n")
+            result.append(u":\n")
             result.append(subject.snippet)
-            result.append("\n")
-            result.append("http://zh.moegirl.org/" + urllib.quote(subject.title))
-            result.append("\n\n")
-            pass
+            result.append(u"\n")
+            result.append(u"http://zh.moegirl.org/" + urllib.quote(subject.title))
+            result.append(u"\n\n")
         if len(wikiList)>5:
             result.append(u"\n★更新姬提示★:\n搜索的结果有点多,可以尝试更多关键字搜索哦!")
-        return "".join(result)
+        return (u"").join(result)
     else:
         return "人家不知道这种东西了啦"
         

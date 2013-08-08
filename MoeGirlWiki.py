@@ -12,7 +12,7 @@ import urllib
 
 _wikiurl = "http://zh.moegirl.org/api.php?format=json&action=query&list=search&srwhat=title&srsearch=$title&srlimit=$limit"
 
-cleancontent = lambda x:str(x).replace("<span class='searchmatch'>", "").replace("</span>", "")
+cleancontent = lambda x:str(x).replace("<span class='searchmatch'>".encode("utf-8"), "".encode("utf-8")).replace("</span>".encode("utf-8"), "".encode("utf-8"))
 
 
 class WikiContent(object):
@@ -24,10 +24,10 @@ class WikiContent(object):
     timestamp=""
     
 def searchTitle(title,size=10):
-    logging.info(title)
     result = list()
-    logging.info( _wikiurl.replace("$title", urllib.quote(title)).replace("$limit", "10"))
-    remoteResult = fetchContentFromUrl(_wikiurl.replace("$title", urllib.quote(title)).replace("$limit", "10"))
+    url = _wikiurl.replace("$title", urllib.quote(title)).replace("$limit", "10")
+    logging.info(url)
+    remoteResult = fetchContentFromUrl(url)
     
     allSubjects=json.loads(remoteResult)["query"]["search"]
     for subject in allSubjects:
