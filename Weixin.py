@@ -11,6 +11,8 @@ from xml.etree import ElementTree
 
 __token = "token"
 __text_answer = "<xml><ToUserName><![CDATA[${toUser}]]></ToUserName><FromUserName><![CDATA[${fromUser}]]></FromUserName><CreateTime>${createTime}</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[${Content}]]></Content><MsgId>${MsgId}</MsgId></xml>"
+__MSGTYPE_TEXT__ = "text"
+__MSGTYPE_EVENT__ = "event"
 
 def validate(param):
     """
