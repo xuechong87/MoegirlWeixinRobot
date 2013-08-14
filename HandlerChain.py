@@ -49,7 +49,7 @@ class HandlerChain(object):
             return result==None and textReply(self.userMsg) or result
         except Exception as e:
             logging.exception(str(e))
-            return textReply(self.userMsg,"555更新姬被玩坏了啦><")
+            return textReply(self.userMsg,"555不能碰那里了啦><")
     
     def invokeNext(self):
         """
@@ -81,6 +81,7 @@ class HandlerChain(object):
         get things from the income msg
         """
         return self.userMsg.get(key).encode("utf-8").strip()
+    
     def forceStop(self):
         """
         stop the handler chain 

@@ -27,8 +27,10 @@ def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'�
     """
     return a text type reply xml
     """
-    result = __text_answer.replace("${toUser}", originMsg.get("FromUserName")).replace("${fromUser}",originMsg.get("ToUserName"))\
-    .replace("${createTime}",originMsg.get("CreateTime")).replace("${MsgId}",originMsg.get("MsgId"))\
+    result = __text_answer.replace("${toUser}", originMsg.get("FromUserName"))\
+    .replace("${fromUser}",originMsg.get("ToUserName"))\
+    .replace("${createTime}",originMsg.get("CreateTime"))\
+    .replace("${MsgId}",originMsg.get("MsgId"))\
     .replace("${Content}",replyStr)
     logging.debug(result)
     return result
