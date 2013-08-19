@@ -6,6 +6,8 @@ Created on 2013-7-1
 import hashlib
 import datetime
 from utils import Commons
+import thread
+
 def sortTests():
     a = "aaaabbc"
     b = "aaabbc"
@@ -29,7 +31,6 @@ if __name__ == "__main__":
     print list_.pop()
     print tu
     x = datetime.datetime.utcnow() + datetime.timedelta(hours=+8)
-    
     
 #    print type(x)
 #    print help(datetime.datetime)

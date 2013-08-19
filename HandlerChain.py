@@ -73,6 +73,7 @@ class HandlerChain(object):
     def getMsgContent(self):
         """
         get the content of the income msg
+        ***only text msg has this value***
         """
         return self.userMsg.get("Content").encode("utf-8").strip()
     

@@ -11,6 +11,27 @@ from xml.etree import ElementTree
 
 __token = "token"
 __text_answer = "<xml><ToUserName><![CDATA[${toUser}]]></ToUserName><FromUserName><![CDATA[${fromUser}]]></FromUserName><CreateTime>${createTime}</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[${Content}]]></Content><MsgId>${MsgId}</MsgId></xml>"
+__pic_answer="<xml>\
+ <ToUserName><![CDATA[$toUser]]></ToUserName>\
+ <FromUserName><![CDATA[$fromUser]]></FromUserName>\
+ <CreateTime>$createTimt</CreateTime>\
+ <MsgType><![CDATA[news]]></MsgType>\
+ <ArticleCount>2</ArticleCount>\
+ <Articles>\
+ <item>\
+ <Title><![CDATA[title1]]></Title> \
+ <Description><![CDATA[description1]]></Description>\
+ <PicUrl><![CDATA[picurl]]></PicUrl>\
+ <Url><![CDATA[url]]></Url>\
+ </item>\
+ <item>\
+ <Title><![CDATA[title]]></Title>\
+ <Description><![CDATA[description]]></Description>\
+ <PicUrl><![CDATA[picurl]]></PicUrl>\
+ <Url><![CDATA[url]]></Url>\
+ </item>\
+ </Articles>\
+ </xml> "
 __MSGTYPE_TEXT__ = "text"
 __MSGTYPE_EVENT__ = "event"
 
