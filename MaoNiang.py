@@ -6,7 +6,7 @@ the maoniang apis
 
 from google.appengine.ext import db
 
-class MaoNianMsg(db.Model):
+class MaoNiangMsg(db.Model):
     
     userId=db.StringProperty()
     msgId=db.StringProperty()
@@ -17,4 +17,19 @@ class MaoNianMsg(db.Model):
         self.msgId = msgId
         self.msgContent = msgContent
         
+
+def send(msg):
+    msg = MaoNiangMsg()
+    msg.save()
+    sendToMaoNiang(msg)
     
+def sendToMaoNiang(msg):
+    pass
+
+
+
+
+
+
+
+
