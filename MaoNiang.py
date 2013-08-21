@@ -19,10 +19,7 @@ class MaoNiangMsg(db.Model):
         
 
 def send(msg):
-    msg = MaoNiangMsg()
-    msg.save()
-    sendToMaoNiang(msg)
-    
+    pass
 def sendToMaoNiang(msg):
     pass
 
