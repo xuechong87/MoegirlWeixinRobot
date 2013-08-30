@@ -4,15 +4,13 @@ Created on 2013-7-3
 handler chain
 @author: xuechong
 '''
-from moehandlers.FlowerHandler import FlowerHandler
-from moehandlers.SellMoeHandler import SellMoeHandler
-from moehandlers.HelpHandler import HelpHandler
-from moehandlers.AnimeListHandler import AnimeListHandler
-from Weixin import textReply
-import logging
 
-__default_chain__ = (SellMoeHandler,FlowerHandler,HelpHandler,AnimeListHandler)
-__text_chain__=(SellMoeHandler,FlowerHandler,HelpHandler,AnimeListHandler)
+from moehandlers import __default_chain__
+from moehandlers import __text_chain__
+from moehandlers import __event_handlers__
+import logging
+import Weixin
+from Weixin import textReply
 
 def textHandlerChain(userMsg):
     """
@@ -30,10 +28,17 @@ class HandlerChain(object):
     
     def __init__(self,userMsg,handlerList=None):
         self.handlers = handlerList
-        if self.handlers==None:
-            self.handlers=list(__default_chain__)
-        logging.debug("new handlerChain" + str(self.handlers))
         self.userMsg = userMsg
+        if self.handlers==None:
+            if(self.getMsgType()==Weixin.__MSGTYPE_TEXT__):
+                self.handlers=list(__text_chain__)
+            else :
+                if(self.getMsgType()==Weixin.__MSGTYPE_EVENT__):
+                    self.handlers=list(__event_handlers__)
+                else :
+                    self.handlers=list(__default_chain__)
+        logging.debug("new handlerChain" + str(self.handlers))
+        
         
     def doChain(self):
         """
@@ -44,7 +49,7 @@ class HandlerChain(object):
             return result==None and textReply(self.userMsg) or result
         except Exception as e:
             logging.exception(str(e))
-            return textReply(self.userMsg,"555更新姬被玩坏了啦><")
+            return textReply(self.userMsg,"555不能碰那里了啦><")
     
     def invokeNext(self):
         """
@@ -68,8 +73,16 @@ class HandlerChain(object):
     def getMsgContent(self):
         """
         get the content of the income msg
+        ***only text msg has this value***
         """
         return self.userMsg.get("Content").encode("utf-8").strip()
+    
+    def getFromMsg(self,key):
+        """
+        get things from the income msg
+        """
+        return self.userMsg.get(key).encode("utf-8").strip()
+    
     def forceStop(self):
         """
         stop the handler chain 

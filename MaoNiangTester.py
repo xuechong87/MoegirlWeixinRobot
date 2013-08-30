@@ -1,6 +1,5 @@
-# coding: utf-8
 '''
-Created on 2013-7-1
+Created on 2013-8-21
 
 @author: xuechong
 '''
@@ -8,14 +7,8 @@ import webapp2
 from Weixin import MsgContent
 import logging
 import Weixin
-from HandlerChain import HandlerChain
-from moehandlers.SellMoeHandler import SellMoeHandler
-from moehandlers.FlowerHandler import FlowerHandler
-from moehandlers.HelpHandler import HelpHandler
-from moehandlers.AnimeListHandler import AnimeListHandler
-from moehandlers.SearchHandler import SearchHandler
-
-__test_chain__=(SellMoeHandler,SearchHandler,FlowerHandler,HelpHandler,AnimeListHandler)
+from google.appengine.api import xmpp
+from httplib import responses
 
 class MainProcessor(webapp2.RequestHandler):
     
@@ -33,10 +26,9 @@ class MainProcessor(webapp2.RequestHandler):
         logging.debug(self.request._body__get())
         write = self.response.out.write
         msg = MsgContent(self.request._body__get())
-        chain = list(__test_chain__)
-        handlerChain= HandlerChain(userMsg=msg,handlerList=chain)
-        write(handlerChain.doChain())
+        chat_message_sent = False
+        status_code = xmpp.send_message(from_jid=from_jid,jids=to_jid,body=msg.content,raw_xml=True)
+        chat_message_sent = (status_code == xmpp.NO_ERROR)
+        write(chat_message_sent)
 
 app = webapp2.WSGIApplication([('/test', MainProcessor)])
-
-

@@ -38,4 +38,3 @@ def loadFromMemcache(namespace,key,createfunction,time=24*60*60):
                    time=time,\
                namespace=namespace)
     return result
-
