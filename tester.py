@@ -17,11 +17,21 @@ from moehandlers.SearchHandler import SearchHandler
 
 __test_chain__=(SellMoeHandler,SearchHandler,FlowerHandler,HelpHandler,AnimeListHandler)
 
-class MainProcessor(webapp2.RequestHandler):
+class TestProcessor(webapp2.RequestHandler):
+    
     
     def get(self):
+        logging.info("get")
         param = self.request.get
         write = self.response.out.write
+        logP = lambda x: logging.info(x + "|" + param(x))
+        
+        logP('token')
+        logP('timestamp')
+        logP('nonce')
+        logP('signature')
+        logP('echostr')
+        
         self.response.headers['Content-Type'] = 'text/plain'
         if Weixin.validate(param):
             write(param("echostr"))
@@ -29,6 +39,7 @@ class MainProcessor(webapp2.RequestHandler):
             write("what's up man -.-?")
         
     def post(self):
+        logging.info("post")
         #if Weixin.validate(self.request.get):
         logging.debug(self.request._body__get())
         write = self.response.out.write
@@ -37,6 +48,6 @@ class MainProcessor(webapp2.RequestHandler):
         handlerChain= HandlerChain(userMsg=msg,handlerList=chain)
         write(handlerChain.doChain())
 
-app = webapp2.WSGIApplication([('/test', MainProcessor)])
+app = webapp2.WSGIApplication([('/test', TestProcessor)])
 
 

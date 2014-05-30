@@ -8,7 +8,7 @@ handlers:
 - url: /weixin
   script: mainProcessor.app
 - url: /test
-  script: MaoNiangTester.app
+  script: tester.app
 - url: /init
   script: inits.app
 - url: /page

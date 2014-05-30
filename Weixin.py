@@ -42,6 +42,7 @@ def validate(param):
     list_ = sorted([__token, param("timestamp"), param("nonce")])
     sha1 = hashlib.sha1()
     sha1.update("".join(list_))
+    logging.info(str(sha1.hexdigest()))
     return str(sha1.hexdigest()) == param("signature")
 
 def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'帮助'可以查看帮助哦!"):
@@ -55,6 +56,12 @@ def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'�
     .replace("${Content}",replyStr)
     logging.debug(result)
     return result
+
+def listReply(originMsg,itemList):
+    '''
+    '''
+    
+
 
 class MsgContent:
     """
@@ -73,4 +80,45 @@ class MsgContent:
     
     def get(self,key):
         return self.content.get(key)
+    
+
+class NewsItem:
+    '''
+    the pic msg items model
+    '''
+    def __init__(self, 
+                 _title="",
+                 _desc="",
+                 _picurl ="",
+                 _clickurl =""):
+        self.title = _title
+        self.desc = _desc
+        self.picurl = _picurl
+        self.clickurl = _clickurl
+        pass
+    
+    title=""
+    desc=""
+    picurl =""
+    clickurl =""
+    
+    def toXmlStr(self):
+        return "<item>\
+        <Title><![CDATA["+self.title+"]]></Title> \
+        <Description><![CDATA["+self.desc+"]]></Description>\
+        <PicUrl><![CDATA["+self.picurl+"]]></PicUrl>\
+        <Url><![CDATA["+self.clickurl+"]]></Url>\
+        </item>"
+        pass
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
