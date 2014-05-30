@@ -14,7 +14,7 @@ __text_answer = "<xml><ToUserName><![CDATA[${toUser}]]></ToUserName><FromUserNam
 __pic_answer="<xml>\
  <ToUserName><![CDATA[$toUser]]></ToUserName>\
  <FromUserName><![CDATA[$fromUser]]></FromUserName>\
- <CreateTime>$createTimt</CreateTime>\
+ <CreateTime>$createTime</CreateTime>\
  <MsgType><![CDATA[news]]></MsgType>\
  <ArticleCount>2</ArticleCount>\
  <Articles>\
@@ -59,9 +59,19 @@ def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'�
 
 def listReply(originMsg,itemList):
     '''
-    '''
     
-
+    '''
+    _articles = "".join([item.toXmlStr() for item in itemList])
+    
+    result = "<xml>\
+            <ToUserName><![CDATA["+originMsg.get("FromUserName")+"]]></ToUserName>\
+            <FromUserName><![CDATA["+originMsg.get("ToUserName")+"]]></FromUserName>\
+            <CreateTime>" + originMsg.get("CreateTime") +"</CreateTime>\
+            <MsgType><![CDATA[news]]></MsgType>\
+            <ArticleCount>"+len(itemList)+"</ArticleCount>\
+            <Articles>" + _articles + "</Articles></xml>"
+    return result
+    
 
 class MsgContent:
     """
