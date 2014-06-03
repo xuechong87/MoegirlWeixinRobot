@@ -8,13 +8,3 @@ search the newest page in moegirl wiki
 import Weixin
 import logging
 
-__event_key__ = "newest_pages"
-class NewPageHandler(object):
-   
-    def handle(self,handlerChain):
-        
-        if (handlerChain.getMsgType()==Weixin.__MSGTYPE_EVENT__):
-            if(handlerChain.getFromMsg("Event")==__event_key__):
-                return Weixin.textReply(handlerChain.userMsg,"")
-        
-        return handlerChain.invokeNext()

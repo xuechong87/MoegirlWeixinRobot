@@ -45,7 +45,7 @@ def validate(param):
     logging.info(str(sha1.hexdigest()))
     return str(sha1.hexdigest()) == param("signature")
 
-def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'帮助'可以查看帮助哦!"):
+def textReply2(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'帮助'可以查看帮助哦!"):
     """
     return a text type reply xml
     """
@@ -57,9 +57,29 @@ def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'�
     logging.debug(result)
     return result
 
+def textReply(originMsg,replyStr="阿嘞?人家不懂你在说什么啦,输入'帮助'可以查看帮助哦!"):
+    """
+    return a text type reply xml
+    """
+    _answer = "<xml>\
+        <ToUserName><![CDATA[%s]]></ToUserName>\
+        <FromUserName><![CDATA[%s]]></FromUserName>\
+        <CreateTime>%s</CreateTime>\
+        <MsgType><![CDATA[text]]></MsgType>\
+        <Content><![CDATA[%s]]></Content>\
+        <MsgId>%s</MsgId></xml>"
+    result = _answer % (originMsg.get("FromUserName"),\
+                        originMsg.get("ToUserName"),\
+                        originMsg.get("CreateTime"),\
+                        replyStr,\
+                        originMsg.get("MsgId"))
+    logging.debug(result)
+    return result
+
+
+
 def listReply(originMsg,itemList):
     '''
-    
     '''
     _articles = "".join([item.toXmlStr() for item in itemList])
     

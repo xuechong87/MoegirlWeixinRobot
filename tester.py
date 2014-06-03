@@ -9,13 +9,7 @@ from Weixin import MsgContent
 import logging
 import Weixin
 from HandlerChain import HandlerChain
-from moehandlers.SellMoeHandler import SellMoeHandler
-from moehandlers.FlowerHandler import FlowerHandler
-from moehandlers.HelpHandler import HelpHandler
-from moehandlers.AnimeListHandler import AnimeListHandler
-from moehandlers.SearchHandler import SearchHandler
-
-__test_chain__=(SellMoeHandler,SearchHandler,FlowerHandler,HelpHandler,AnimeListHandler)
+from moehandlers import __test_chain__
 
 class TestProcessor(webapp2.RequestHandler):
     
